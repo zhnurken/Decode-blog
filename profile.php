@@ -22,7 +22,7 @@
 	<title>Профиль</title>
 	<?php include "views/head.php"; ?>
 </head>
-<body>
+<body data-baseurl="<?=$BASE_URL?>">
 
 <?php include "views/header.php"; ?>
 
@@ -54,74 +54,7 @@
 		?>
 		</div>
 
-		<div class="blogs">
-
-			<?php
-				if(mysqli_num_rows($blogs)){
-					while($blog= mysqli_fetch_assoc($blogs)){
-			?>
-			<div class="blog-item">
-				<img class="blog-item--img" src="<?=$BASE_URL?><?=$blog["img"]?>" alt="">
-				<div class="blog-header">
-					<h3><?=$blog["title"]?></h3>
-						<?php
-						if($blog["nickname"] == $_SESSION["nickname"]) {
-						?>
-
-					<span class="link">
-						<img src="images/dots.svg" alt="">
-						Еще
-
-						<ul class="dropdown">
-							<li> <a href="<?=$BASE_URL?>/editblog.php?id=<?=$blog["id"]?>">Редактировать</a> </li>
-							<li><a href="<?=$BASE_URL?>/api/blog/delete.php?id=<?=$blog["id"]?>" class="danger">Удалить</a></li>
-						</ul>
-					</span>
-
-					<?php
-						}
-					?>
-
-				</div>
-				<p class="blog-desc">
-				<?=$blog["description"]?>
-				</p>
-
-				<div class="blog-info">
-					<span class="link">
-						<img src="images/date.svg" alt="">
-						<?=to_time_ago(strtotime($blog["date"]))?>
-						<!-- to_time_ago показывает как давно загрузился файл -->
-					</span>
-					<span class="link">
-						<img src="images/visibility.svg" alt="">
-						21
-					</span>
-					<a class="link">
-						<img src="images/message.svg" alt="">
-						4
-					</a>
-					<span class="link">
-						<img src="images/forums.svg" alt="">
-						<?=$blog["name"]?>
-					</span>
-					<a class="link">
-						<img src="images/person.svg" alt="">
-						<?=$blog["nickname"]?>
-					</a>
-				</div>
-			</div>
-			
-			<?php
-				}
-			}else{
-			?>
-				<h1>0 blogs</h1>
-			<?php
-			}
-			?>
-
-		</div>
+		<div class="blogs"></div>
 	</div>
 	<div class="page-info">
 		<div class="user-profile">
@@ -135,5 +68,7 @@
 		</div>
 	</div>
 </section>	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="./js/profile.js"></script>
 </body>
 </html>

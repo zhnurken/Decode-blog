@@ -61,6 +61,7 @@
 		$skip = ($page - 1) * $limit;
 		$sql .= " LIMIT $skip, $limit";
 	}else {
+		header("Location: $BASE_URL/index.php?page=1");
 		$sql .= " LIMIT $limit";
 	}
     $query_blog = mysqli_query($con, $sql);
